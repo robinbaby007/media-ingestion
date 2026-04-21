@@ -13,7 +13,7 @@ import java.time.Instant;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Event {
+public class MediaEventRequest {
     @NotBlank(message = "Media ID is required")
     private String mediaId;
 
