@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.mi</groupId>
-	<artifactId>event_api_service</artifactId>
+	<artifactId>event-api-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
 		<java.version>17</java.version>
