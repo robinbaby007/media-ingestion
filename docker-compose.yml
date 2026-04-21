@@ -1,0 +1,13 @@
+services:
+  redis:
+    image: redis:7.4-alpine
+    container_name: media-redis
+    ports:
+      - "8982:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --requirepass redis123 --appendonly yes # Ensures data isn't lost on restart
+    restart: always
+
+volumes:
+  redis_data:
