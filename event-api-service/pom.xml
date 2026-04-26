@@ -51,7 +51,25 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
-	</dependencies>
+        <!-- Kafka dependency -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-kafka</artifactId>
+        </dependency>
+
+        <!-- jackson dependency to convert java object to json -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
+        <!-- jackson dependency to handle java 8 time api -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+        </dependency>
+
+    </dependencies>
 
 	<build>
 		<plugins>
