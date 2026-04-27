@@ -1,5 +1,6 @@
 package com.mi.event_ingestion_service.models;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,19 +10,31 @@ import java.time.Instant;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "media_event")
 public class MediaEventRequest {
-     private String mediaId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-     private String userId;
+    @Column(name = "media_id", nullable = false)
+    private String mediaId;
 
-     private Instant eventTimestamp;
+    @Column(name = "user_id", nullable = false)
+    private String userId;
 
-     private EventType eventType;
+    @Column(name = "event_timestamp", nullable = false)
+    private Instant eventTimestamp;
 
-     private Double playbackPosition;
+    @Column(name = "event_type", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private EventType eventType;
 
-    // Optional
+    @Column(name = "playback_position",  nullable = false)
+    private Double playbackPosition;
+
+    @Column(name = "device_type")
     private String deviceType;
-    // Optional
+
     private String region;
 }
