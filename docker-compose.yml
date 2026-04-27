@@ -37,9 +37,24 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     networks:
       - media_network
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-media-container
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: media_events_db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - media_network
 
 volumes:
   redis_data:
+  mysql_data:
 
 networks:
   media_network:
