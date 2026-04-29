@@ -19,6 +19,10 @@ public class GatewayRoutingConfig {
                         .path("/api/ingestion", "/api/ingestion/**")
                         .uri("lb://EVENT-INGESTION-SERVICE")
                 )
+                .route("user-service", r -> r
+                        .path("/api/v1/users/**")
+                        .uri("lb://USER-SERVICE")
+                )
                 .build();
     }
 }
