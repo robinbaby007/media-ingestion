@@ -1,4 +1,4 @@
-package com.mi.geteway;
+package com.mi.geteway.routing;
 
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
@@ -15,6 +15,10 @@ public class GatewayRoutingConfig {
                         .path("/api/events", "/api/events/**")
                         // Forwards to the load balancer
                         .uri("lb://EVENT-API-SERVICE"))
+                .route("event-ingestion-service", r -> r
+                        .path("/api/ingestion", "/api/ingestion/**")
+                        .uri("lb://EVENT-INGESTION-SERVICE")
+                )
                 .build();
     }
 }
