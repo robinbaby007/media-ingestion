@@ -52,6 +52,22 @@ services:
     networks:
       - media_network
 
+  mysql-user:
+    image: mysql:8.0
+    container_name: mysql-user-container
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: user_db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql-user
+    networks:
+      - media_network
+
+
 volumes:
   redis_data:
   mysql_data:
