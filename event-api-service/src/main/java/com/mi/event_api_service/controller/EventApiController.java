@@ -22,6 +22,7 @@ public class EventApiController {
     @PostMapping
     public ResponseEntity<String> sentMediaEvent(
             @RequestHeader("Idempotency-Key") String idempotencyKey,
+            @RequestHeader("X-Auth-User") String userEmail,
             @Valid @RequestBody MediaEventRequest mediaEventRequest) {
         if (idempotencyKey == null || idempotencyKey.isEmpty()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Idempotency-Key header is required");
@@ -29,7 +30,7 @@ public class EventApiController {
 
         Boolean isEventNotExists = eventMediaService.sentMediaEvent(mediaEventRequest, idempotencyKey);
         if (isEventNotExists) {
-            eventProducer.publishOrderCreatedEvent(mediaEventRequest);
+            eventProducer.publishOrderCreatedEvent(mediaEventRequest, userEmail);
             return ResponseEntity.status(HttpStatus.CREATED).body("Event received successfully");
         } else {
             return ResponseEntity.status(HttpStatus.OK).body("Duplicate event detected. This event has already been processed.");

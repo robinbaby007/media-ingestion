@@ -14,8 +14,16 @@ public class EventProducer {
     private static final Logger log = LoggerFactory.getLogger(EventProducer.class);
     private final KafkaTemplate<String, MediaEventRequest> kafkaTemplate;
 
-    public void publishOrderCreatedEvent(MediaEventRequest mediaEventRequest) {
-        kafkaTemplate.send(TOPIC, mediaEventRequest.getMediaId(), mediaEventRequest)
+    public void publishOrderCreatedEvent(MediaEventRequest mediaEventRequest, String email) {
+        MediaEventRequest updatedmediaEventRequest = MediaEventRequest.builder().mediaId(mediaEventRequest.getMediaId())
+                .userId(email) // update email as userId
+                .eventTimestamp(mediaEventRequest.getEventTimestamp())
+                .eventType(mediaEventRequest.getEventType())
+                .playbackPosition(mediaEventRequest.getPlaybackPosition())
+                .deviceType(mediaEventRequest.getDeviceType())
+                .region(mediaEventRequest.getRegion())
+                .build();
+        kafkaTemplate.send(TOPIC, mediaEventRequest.getMediaId(), updatedmediaEventRequest)
                 .whenComplete((result, ex) -> {
                     if (ex == null) {
                         log.info("Message sent successfully to partition: {}, offset: {}"
