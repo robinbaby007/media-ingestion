@@ -17,6 +17,7 @@
     <module>event-ingestion-service</module>
     <module>eureka-server</module>
     <module>gateway</module>
+    <module>user-service</module>
     </modules>
     <properties>
 		<java.version>17</java.version>
