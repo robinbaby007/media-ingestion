@@ -40,11 +40,11 @@ public class UserApiController {
     public ResponseEntity<LoginResponse> login(@RequestBody AuthRequest request) {
         log.info("Request received to login user with email: {}", request.email());
         try {
-            User user = userService.login(request.email(), request.password());
-            return ResponseEntity.ok(new LoginResponse("Login successful"));
+            String jwt = userService.login(request.email(), request.password());
+            return ResponseEntity.ok(new LoginResponse("Login successful", jwt));
         } catch (IllegalArgumentException e) {
             log.warn("Login failed: {}", e.getMessage());
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponse(e.getMessage()));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponse(e.getMessage(),null));
         }
     }
 }
