@@ -13,7 +13,7 @@ public class EventInjestionService {
 
     private final MediaInjestionRepository mediaInjestionRepository;
 
-        public List<MediaEventRequest> getAllSavedEvents() {
-            return mediaInjestionRepository.findAll();
+        public List<MediaEventRequest> getAllSavedEvents(String email) {
+            return mediaInjestionRepository.findByUserId(email);
         }
 }

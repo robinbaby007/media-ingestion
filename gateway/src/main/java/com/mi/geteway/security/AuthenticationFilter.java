@@ -37,6 +37,12 @@ public class AuthenticationFilter implements GlobalFilter {
             throw new RuntimeException("Invalid Authorization Header format");
         }
 
+        try{
+            jwtService.extractEmailFromToken(authHeader);// Tampered/Wrong/Expired token will throw an exception here
+        }catch (Exception e){
+            throw new RuntimeException("Invalid Token: " + e.getMessage());
+        }
+
         try {
             modifiedExchange = exchange.mutate()
                     .request(exchange.getRequest().mutate()

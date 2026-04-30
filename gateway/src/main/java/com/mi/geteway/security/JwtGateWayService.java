@@ -16,12 +16,12 @@ public class JwtGateWayService {
     }
 
 
-    public String extractEmailFromToken(String token) {
-        return Jwts.parser() // open
+    public void extractEmailFromToken(String token) {
+        Jwts.parser() // open
                 .verifyWith(key)
                 .build()
                 .parseSignedClaims(token)
                 .getPayload()
-                .getSubject(); // email is the subject
+                .getSubject();
     }
 }
