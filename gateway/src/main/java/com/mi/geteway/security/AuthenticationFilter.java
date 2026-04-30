@@ -38,10 +38,9 @@ public class AuthenticationFilter implements GlobalFilter {
         }
 
         try {
-            String email = jwtService.extractEmailFromToken(authHeader);
             modifiedExchange = exchange.mutate()
                     .request(exchange.getRequest().mutate()
-                            .header("X-Auth-Email", email) // Pass email downstream
+                            .header(HttpHeaders.AUTHORIZATION, authHeader) // Removed Bearer and Pass the token to downstream
                             .build())
                     .build();
 
