@@ -67,6 +67,18 @@ services:
     networks:
       - media_network
 
+  redis-rate-limit:
+    image: redis:7.4-alpine
+    container_name: rate-limit-redis
+    ports:
+      - "8983:6379"
+    volumes:
+      - redis_data:/data_limit
+    command: redis-server --requirepass redis123 --appendonly yes # Ensures data isn't lost on restart
+    restart: always
+    networks:
+      - media_network
+
 
 volumes:
   redis_data:
