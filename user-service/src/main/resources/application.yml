@@ -32,3 +32,12 @@ eureka:
 jwt:
   secret: thisIsASecretKeyForJWTGenerationAndIsNotTooShortAndNotTooLongEitherAndShouldBeKeptSafeAndSecure
   expiration: 3600000 # 1 hour in milliseconds
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,matrics,loggers
+  endpoint:
+    health:
+      show-details: always

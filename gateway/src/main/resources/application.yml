@@ -31,10 +31,12 @@ management:
   endpoints:
     web:
       exposure:
-        include: gateway,health,info
+        include: gateway,health,info,matrics,loggers
   endpoint:
     gateway:
       enabled: true
+    health:
+      show-details: always
 
 jwt:
   secret: thisIsASecretKeyForJWTGenerationAndIsNotTooShortAndNotTooLongEitherAndShouldBeKeptSafeAndSecure
