@@ -19,4 +19,15 @@ public class GlobalExceptionHandler {
         });
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
     }
+
+    // 3. Global fallback for any unhandled exceptions
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiErrorResponse> handleGlobalException(Exception ex) {
+        ApiErrorResponse errorResponse = ApiErrorResponse.builder()
+                .error(ex.getMessage())
+                .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                .message("An unexpected error occurred.")
+                .build();
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }
